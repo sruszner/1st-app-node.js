@@ -38,8 +38,7 @@ const conexion = mysql.createConnection({
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'assets')));
-app.use(express.urlencoded({extended: false}));
-
+app.use(express.urlencoded({extended: true}));
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -74,12 +73,31 @@ app.get('/contact', (req, res) =>{
     res.render('contact', {titulo: 'Contact Us'})
 })
 
+app.post('/contact', (req, res) =>{
+    console.log(req.body);
+    res.send('Recibimos tus datos');
+    
+// Desestructuramos
+    console.log(req.body.firstName);
+    console.log(req.body.lastName);
+    console.log(req.body.username);
+    console.log(req.body.email);
+    console.log(req.body.address);
+    console.log(req.body.address2);
+    console.log(req.body.country);
+    console.log(req.body.state);
+    console.log(req.body.zip);
+    console.log(req.body.dataStorage);
+    console.log(req.body.beContacted);
+    console.log(req.body.metOn);
+})
+
+
 app.get('/formulario', (req, res) =>{
     res.render('formulario', {titulo: 'Formulario'})
 })
 
 // verbo http para recibir datos
-
 app.post('/formulario', (req, res) =>{
     console.log(req.body);
     res.send('Recibimos tus datos')
