@@ -33,7 +33,6 @@ const conexion = mysql.createConnection({
     })
 }) */ 
 
-
 // Configuracion de middlewares 
 
 app.use(express.json());
