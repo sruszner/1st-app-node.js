@@ -7,7 +7,7 @@ const hbs = require('hbs');
 const mysql = require('mysql2');
 const path = require('path');
 const nodemailer = require('nodemailer');
-const { dirname } = require('path');
+
 
 // Conectamos la app a una Base de Datos
 
@@ -24,20 +24,27 @@ const conexion = mysql.createConnection({
     conexion.connect(function(error){
     if(error) throw error;
     console.log("Conexion a la DB exitosa");
-})
- */
-/* 
-const conectar = async({
+}) */
+
+/* const conectar = async({
     await conexion.connect((error) => {
         if(error) throw error;
         console.log('Base de datos conectada!');
     })
-}) */
+}) 
+ */
+
+// Configuracion de middlewares 
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.urlencoded({extended: false}));
+
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
-app.use(express.static(path.join(__dirname, 'assets')));
+
 
 app.get('/', (req, res) =>{
     res.render('index', {titulo: 'Home'})
@@ -65,6 +72,22 @@ app.get('/lmp1', (req, res) =>{
 
 app.get('/contact', (req, res) =>{
     res.render('contact', {titulo: 'Contact Us'})
+})
+
+app.get('/formulario', (req, res) =>{
+    res.render('formulario', {titulo: 'Formulario'})
+})
+
+// verbo http para recibir datos
+
+app.post('/formulario', (req, res) =>{
+    console.log(req.body);
+    res.send('Recibimos tus datos')
+// Desestructuramos
+    console.log(req.body.nombre);
+    console.log(req.body.precio);
+    console.log(req.body.descripcion);
+
 })
 
 app.get('/construction', (req, res) =>{
