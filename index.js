@@ -40,6 +40,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.urlencoded({extended: true}));
 
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
@@ -93,12 +94,22 @@ app.post('/contact', (req, res) =>{
 })
 
 // verbo http para recibir datos
-app.post('/footer', (req, res) =>{
+app.post('/subscribed', (req, res) =>{
     console.log(req.body);
-    res.render('subscribed', {titulo: 'Subscribed'})
+    res.render('subscribed');
 // Desestructuramos
     console.log(req.body.emailNewsletter);
 })
+
+app.post('/search', function(req, res, next) {
+    var title = req.params.title;
+    views.find({title: title}, function (err, views) {
+        if(err) {
+            return res.render('search', {views: null});
+        }
+        res.render('search', {views: views});
+    });
+});
 
 app.get('/construction', (req, res) =>{
     res.render('construction', {titulo: 'Under construction'})
