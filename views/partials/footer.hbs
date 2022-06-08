@@ -41,14 +41,15 @@
             </div>
 
             <div class="col-4 offset-1">
-                <form>
+                <form action="./footer" method="post" novalidate class="needs-validation">
                     <h5>Subscribe to our newsletter</h5>
                     <p>Monthly digest of whats new and exciting from us.</p>
                     <div class="d-flex w-100 gap-2">
                         <label for="newsletter1" class="visually-hidden">Email address</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-danger" type="button">Subscribe</button>
+                        <input id="newsletter1" type="email" name="emailNewsletter" class="form-control" placeholder="Email address" required>
+                        <input type="submit" button class="btn btn-danger" type="button" value="Subscribe">
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -82,3 +83,23 @@
         </div>
     </footer>
 </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>

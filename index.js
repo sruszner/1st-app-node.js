@@ -20,19 +20,19 @@ const conexion = mysql.createConnection({
 })
 
 // Conectamos la Bse de Datos
-/* 
+
     conexion.connect(function(error){
     if(error) throw error;
     console.log("Conexion a la DB exitosa");
-}) */
+}) 
 
-/* const conectar = async({
+/*  const conectar = async({
     await conexion.connect((error) => {
         if(error) throw error;
         console.log('Base de datos conectada!');
     })
-}) 
- */
+}) */ 
+
 
 // Configuracion de middlewares 
 
@@ -75,8 +75,8 @@ app.get('/contact', (req, res) =>{
 
 app.post('/contact', (req, res) =>{
     console.log(req.body);
-    res.send('Recibimos tus datos');
-    
+    res.render('form-received');
+
 // Desestructuramos
     console.log(req.body.firstName);
     console.log(req.body.lastName);
@@ -92,20 +92,12 @@ app.post('/contact', (req, res) =>{
     console.log(req.body.metOn);
 })
 
-
-app.get('/formulario', (req, res) =>{
-    res.render('formulario', {titulo: 'Formulario'})
-})
-
 // verbo http para recibir datos
-app.post('/formulario', (req, res) =>{
+app.post('/footer', (req, res) =>{
     console.log(req.body);
-    res.send('Recibimos tus datos')
+    res.render('subscribed', {titulo: 'Subscribed'})
 // Desestructuramos
-    console.log(req.body.nombre);
-    console.log(req.body.precio);
-    console.log(req.body.descripcion);
-
+    console.log(req.body.emailNewsletter);
 })
 
 app.get('/construction', (req, res) =>{
@@ -123,5 +115,4 @@ app.listen(Port, () =>{
 app.on('error', (error) =>{
     console.log(`Tenemos un error ${error}`);
 })
-
 
