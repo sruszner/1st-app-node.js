@@ -11,7 +11,7 @@ const nodemailer = require('nodemailer');
 
 // Conectamos la app a una Base de Datos
 
-  const conexion = mysql.createConnection({
+const conexion = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
@@ -25,7 +25,7 @@ const conectar = conexion.connect(function (error) {
     if (error) throw error;
     console.log("Conexion a la DB exitosa");
 })
- 
+
 /*     const conectar = async({
     await conexion.connect((error) => {
         if(error) throw error;
