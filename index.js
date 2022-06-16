@@ -11,14 +11,14 @@ const nodemailer = require('nodemailer');
 
 // Conectamos la app a una Base de Datos
 
-const conexion = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    port: process.env.PORTDB,
-    database: process.env.DATABASE,
+ const conexion = mysql.createConnection({
+    host: us-cdbr-east-05.cleardb.net,
+    user: bcb2adfad530a2,
+    password: 5e1e84ca,
+    //port: process.env.PORTDB,
+    database: heroku_b94d852201155b2,
 })
-
+ 
 // Conectamos la Bse de Datos
 
 const conectar = conexion.connect(function (error) {
