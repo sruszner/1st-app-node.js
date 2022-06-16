@@ -20,11 +20,11 @@ const conexion = mysql.createConnection({
 })
 
 // Conectamos la Bse de Datos
-/
+
     conexion.connect(function(error){
     if(error) throw error;
     console.log("Conexion a la DB exitosa");
-})
+})  
 
 /*     const conectar = async({
     await conexion.connect((error) => {
