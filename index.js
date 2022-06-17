@@ -187,7 +187,7 @@ app.post('/subscribed', (req, res) => {
     const { emailNewsletter } = req.body;
     console.log(emailNewsletter);
 
-   //res.render('subscribed')
+    res.render('subscribed')
 })
 
 app.get('/construction', (req, res) => {
