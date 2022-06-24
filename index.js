@@ -185,11 +185,15 @@ app.post('/form-received', (req, res) => {
     console.log(req.body.country);
     console.log(req.body.state);
     console.log(req.body.zip);
+    console.log(req.body.textarea);
     console.log(req.body.dataStorage);
     console.log(req.body.beContacted);
     console.log(req.body.metOn);
-    const { firstName, lastName, username, email, address, address2, country, state, zip, dataStorage, beContacted, metOn } = req.body;
+    const { firstName, lastName, username, email, address, address2, country, state, zip, textarea, dataStorage, beContacted, metOn } = req.body;
     //conectar();
+
+    // no le paso el text area a data porque no lo declare en la Database
+
     let data = {
         firstName: firstName,
         lastName: lastName,

@@ -36,10 +36,10 @@
                 <td>{{ zip }}</td>
                 <td>{{ metOn }}</td>
                 <td>
-                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-bs-toggle="modal"data-bs-target="#editModal" data-id="{{ id}}" data-firstname="{{ firstName}}" data-email="{{ email}}">
+                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-id="{{ id}}" data-firstname="{{ firstName}}" data-email="{{ email}}">
                         Edit
                     </a>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#DeleteModal"  class="btn btn-danger delete" data-id="{{ id}}">
+                    <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ id}}">
                         Delete
                     </a>
                 </td>
@@ -120,7 +120,7 @@
             let id = $(this).data('id');
             let firstname = $(this).data('firstname');
             let email = $(this).data('email');
-            //$('#editModal').modal('show');
+            $('#editModal').modal('show');
             $('.firstname').val(firstname);
             $('.email').val(email);
             $('.id').val(id);
@@ -128,7 +128,7 @@
         // Modal DELETE    
         $('#mytable').on('click', '.delete', function () {
             let id = $(this).data('id');
-            //$('#DeleteModal').modal('show');
+            $('#DeleteModal').modal('show');
             $('.id').val(id);
         })
     })

@@ -110,31 +110,23 @@
 
 
 
-
 <script>
     $(document).ready(function () {
-        // Modal    
-        $('#subscribe').on('click', '.subscribe', function () {
+        $(".subscribe").click(function () {
             $('#exampleModal').modal('show');
         })
-    })
 
-    $(document).ready(function () {
-        let formulario = document.getElementById('subscribe');
         $(".cerrarModal").click(function () {
-            $("#exampleModal").modal('hide')
+            $("#exampleModal").modal('hide');
             location.reload();
         });
     })
-</script>
 
-<script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
             'use strict'
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             const forms = document.querySelectorAll('.needs-validation')
-
             // Loop over them and prevent submission
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
