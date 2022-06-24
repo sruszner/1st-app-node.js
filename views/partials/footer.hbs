@@ -35,7 +35,8 @@
                     <li class="nav-item mb-2"><a href="../login" class="nav-link p-0 text-muted">Login</a> </li>
                     <li class="nav-item mb-2"><a href="../construction" class="nav-link p-0 text-muted">Guided tour</a>
                     </li>
-                    <li class="nav-item mb-2"><a href="../administrator" class="nav-link p-0 text-muted">Administrator</a></li>
+                    <li class="nav-item mb-2"><a href="../administrator"
+                            class="nav-link p-0 text-muted">Administrator</a></li>
                     <li class="nav-item mb-2"><a href="../construction" class="nav-link p-0 text-muted">Incentives</a>
                     </li>
                     <li class="nav-item mb-2"><a href="../construction" class="nav-link p-0 text-muted">Press</a></li>
@@ -44,40 +45,35 @@
 
             <div class="col-4 offset-1">
 
-                <form action="./subscribed" method="post" novalidate class="needs-validation">
+                <form action="./subscribed" method="post" id="subscribe" class="needs-validation" novalidate>
                     <h5>Subscribe to our newsletter</h5>
                     <p>Monthly digest of whats new and exciting from us.</p>
                     <div class="d-flex w-100 gap-2">
                         <label for="newsletter1" class="visually-hidden">Email address</label>
                         <input id="newsletter1" type="email" name="emailNewsletter" class="form-control"
                             placeholder="Email address" required>
-                        <input type="submit" button class="btn btn-danger" value="Subscribe" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <input type="submit" button class="btn btn-danger subscribe" value="Subscribe">
                     </div>
                 </form>
 
 
                 <!-- Modal -->
-
-                <div class="modal fade" id="exampleModal" name="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="exampleModal" tabindex="-1" name="myModal" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                            <div class="modal-header font-weight-bold">
+                                <strong>SPA Francorchamps</strong>
                             </div>
-                            <div class="modal-body">
-                                ...
+                            <div class="modal-body text-success">
+                                <h4>Thank you for subscribing!</h4>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-success cerrarModal">Ok, Got it</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="d-flex justify-content-between py-4 my-4 border-top">
                     <p>&copy; 2021 Spa-Francorchamps. All rights reserved.</p>
@@ -110,22 +106,44 @@
     </footer>
 </div>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-        'use strict'
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
-            }, false)
+
+
+
+<script>
+    $(document).ready(function () {
+        // Modal    
+        $('#subscribe').on('click', '.subscribe', function () {
+            $('#exampleModal').modal('show');
         })
-    })()
+    })
+
+    $(document).ready(function () {
+        let formulario = document.getElementById('subscribe');
+        $(".cerrarModal").click(function () {
+            $("#exampleModal").modal('hide')
+            location.reload();
+        });
+    })
+</script>
+
+<script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
 </script>

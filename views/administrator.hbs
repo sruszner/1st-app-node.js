@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody class="text-center">{{#each results}}<tr>
-                <td>{{ idGenero }}</td>
+                <td>{{ id }}</td>
                 <td>{{ firstName }}</td>
                 <td>{{ lastName }}</td>>
                 <td>{{ username }}</td>>
@@ -36,10 +36,10 @@
                 <td>{{ zip }}</td>
                 <td>{{ metOn }}</td>
                 <td>
-                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-bs-toggle="modal"data-bs-target="#editModal" data-id="{{ idGenero}}" data-firstname="{{ firstName}}" data-email="{{ email}}">
+                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-bs-toggle="modal"data-bs-target="#editModal" data-id="{{ id}}" data-firstname="{{ firstName}}" data-email="{{ email}}">
                         Edit
                     </a>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#DeleteModal"  class="btn btn-danger delete" data-id="{{ idGenero}}">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#DeleteModal"  class="btn btn-danger delete" data-id="{{ id}}">
                         Delete
                     </a>
                 </td>
@@ -79,7 +79,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id" class="idGenero">
+                    <input type="hidden" name="id" class="id">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-success">Update</button>
                 </div>
@@ -103,7 +103,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id" class="idGenero">
+                    <input type="hidden" name="id" class="id">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </div>
@@ -117,19 +117,19 @@
     $(document).ready(function () {
         //Mostrar datos al modal para editar registro
         $('#mytable').on('click', '.edit', function () {
-            let idGenero = $(this).data('id');
+            let id = $(this).data('id');
             let firstname = $(this).data('firstname');
             let email = $(this).data('email');
             //$('#editModal').modal('show');
             $('.firstname').val(firstname);
             $('.email').val(email);
-            $('.idGenero').val(idGenero);
+            $('.id').val(id);
         })
         // Modal DELETE    
         $('#mytable').on('click', '.delete', function () {
-            let idGenero = $(this).data('id');
+            let id = $(this).data('id');
             //$('#DeleteModal').modal('show');
-            $('.idGenero').val(idGenero);
+            $('.id').val(id);
         })
     })
 </script>
