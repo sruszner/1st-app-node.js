@@ -63,17 +63,41 @@ app.get('/gt3', (req, res) => {
     res.render('gt3', { titulo: 'GT3' })
 })
 
-app.get('/administrator', (req, res) => {
-    res.render('administrator')
-})
-
-app.get('/drivingexperience', (req, res) =>{
+app.get('/administrator', (req, res) =>{
     let sql = "SELECT * FROM usuario";
     let query = conexion.query(sql, (err, results) =>{
         if (err) throw err;
-        res.render('drivingexperience', {titulo: 'Contact List',results})
+        res.render('administrator', {tabla1: 'Contact List',results})
     })
 })
+
+app.post('/administrator', (req, res) =>{
+
+
+    console.log(req.body.firstname);
+    console.log(req.body.email);
+    console.log(req.body.id);
+    //res.send("Actualizamos los datos");
+
+    let sql = "UPDATE USUARIO SET firstName='" + req.body.firstname + "', email='" + req.body.email + "' WHERE idGenero=" + req.body.id;
+    let query = conexion.query(sql, (err, results) =>{
+        if (err) throw err;
+        res.redirect('/administrator')
+    })   
+})
+
+app.post('/delete', (req, res) =>{
+
+    console.log(req.body.id);
+    //res.send("Eliminamos los datos");
+
+    let sql = "DELETE FROM USUARIO WHERE idGenero=" + req.body.id;
+
+    let query = conexion.query(sql, (err, results) =>{
+        if (err) throw err;
+        res.redirect('/administrator')
+    })    
+});
 
 
 app.get('/lmp1', (req, res) => {
@@ -125,14 +149,25 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    console.log(req.body);
-    //res.send({respuesta: "tus datos son correctos"})
-    const { nameRegister, emailRegister, passwordRegister } = req.body;
-    console.log(nameRegister);
+
+    let { emailRegister, nameRegister, passwordRegister } = req.body;
     console.log(emailRegister);
+    console.log(nameRegister);
     console.log(passwordRegister);
-    res.send({ respuesta: "REGISTRO OK" })
-})
+
+    let register = {
+        email: emailRegister,
+        name: nameRegister,
+        password: passwordRegister
+    }
+
+    let sql = "INSERT INTO REGISTER SET ?";
+    let query = conexion.query(sql, register, (err, results) => {
+        if (err) throw err;
+        res.render('login')
+        });
+    })
+
 
 app.get('/contact', (req, res) => {
     res.render('contact', { titulo: 'Contact Us' })
@@ -181,14 +216,14 @@ app.post('/form-received', (req, res) => {
 
 // verbo http para recibir datos
 
-app.post('/subscribed', (req, res) => {
+    app.post('/subscribed', (req, res) => {
     console.log(req.body);
     //res.send({respuesta: "tus datos son correctos"})
     const { emailNewsletter } = req.body;
     console.log(emailNewsletter);
 
     res.render('subscribed')
-})
+}) 
 
 app.get('/construction', (req, res) => {
     res.render('construction', { titulo: 'Under construction' })
