@@ -21,10 +21,10 @@ const conexion = mysql.createConnection({
 
 // Conectamos la Bse de Datos
 
-    conexion.connect(function(error){
-    if(error) throw error;
+conexion.connect(function (error) {
+    if (error) throw error;
     console.log("Conexion a la DB exitosa");
-})  
+})
 
 /*     const conectar = async({
     await conexion.connect((error) => {
@@ -67,35 +67,35 @@ app.get('/pricing', (req, res) => {
     res.render('pricing')
 })
 
-app.get('/administrator', (req, res) =>{
+app.get('/administrator', (req, res) => {
     let sql = "SELECT * FROM contact";
-    let query = conexion.query(sql, (err, results) =>{
+    let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
-        res.render('administrator', {tabla1: 'Contact List',results})
+        res.render('administrator', { tabla1: 'Contact List', results })
     })
 })
 
-app.post('/administrator', (req, res) =>{
+app.post('/administrator', (req, res) => {
     console.log(req.body.firstname);
     console.log(req.body.email);
     console.log(req.body.id);
     //res.send("Actualizamos los datos");
     let sql = "UPDATE CONTACT SET firstName='" + req.body.firstname + "', email='" + req.body.email + "' WHERE id=" + req.body.id;
-    let query = conexion.query(sql, (err, results) =>{
+    let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
-    })   
+    })
 })
 
-app.post('/delete', (req, res) =>{
+app.post('/delete', (req, res) => {
 
     console.log(req.body.id);
     //res.send("Eliminamos los datos");
     let sql = "DELETE FROM CONTACT WHERE id=" + req.body.id;
-    let query = conexion.query(sql, (err, results) =>{
+    let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
-    })    
+    })
 });
 
 
@@ -164,8 +164,8 @@ app.post('/register', (req, res) => {
     let query = conexion.query(sql, register, (err, results) => {
         if (err) throw err;
         res.render('login')
-        });
-    })
+    });
+})
 
 app.get('/contact', (req, res) => {
     res.render('contact', { titulo: 'Contact Us' })
@@ -218,11 +218,47 @@ app.post('/form-received', (req, res) => {
 
 // verbo http para recibir datos
 
-    app.post('/subscribed', (req, res) => {
+app.post('/subscribed', (req, res) => {
     console.log(req.body);
     const { emailNewsletter } = req.body;
-    console.log(emailNewsletter);
-}) 
+    console.log('subscribed');
+
+    let transporter = nodemailer.createTransport({
+        //service: 'gmail',
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'spafrancorchampsapp@gmail.com',
+            pass: 'yqcocvlwiksrgvsy'
+        }
+    });
+
+    transporter.verify(function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Server is ready to take our messages");
+        }
+    });
+
+
+    var mailOptions = {
+        from: 'spafrancorchapsapp@gmail.com',
+        to: emailNewsletter,
+        subject: 'SPA Circuit - Subscribed',
+        html: '<h3>Thank you so much for your subscription,</h3> <p>it means a lot to us. We really appreciate you taking a moment of your time today.</p>'
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+    res.render('form-received')
+})
 
 app.get('/construction', (req, res) => {
     res.render('construction', { titulo: 'Under construction' })
