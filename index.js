@@ -68,7 +68,7 @@ app.get('/pricing', (req, res) => {
 })
 
 app.get('/administrator', (req, res) => {
-    let sql = "SELECT * FROM contact";
+    let sql = "SELECT * FROM USUARIO";
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.render('administrator', { tabla1: 'Contact List', results })
@@ -80,7 +80,7 @@ app.post('/administrator', (req, res) => {
     console.log(req.body.email);
     console.log(req.body.id);
     //res.send("Actualizamos los datos");
-    let sql = "UPDATE CONTACT SET firstName='" + req.body.firstname + "', email='" + req.body.email + "' WHERE id=" + req.body.id;
+    let sql = "UPDATE CONTACT SET firstName='" + req.body.firstname + "', email='" + req.body.email + "' WHERE idGenero=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
@@ -91,7 +91,7 @@ app.post('/delete', (req, res) => {
 
     console.log(req.body.id);
     //res.send("Eliminamos los datos");
-    let sql = "DELETE FROM CONTACT WHERE id=" + req.body.id;
+    let sql = "DELETE FROM USUARIO WHERE idGenero=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
@@ -160,7 +160,7 @@ app.post('/register', (req, res) => {
         password: passwordRegister
     }
 
-    let sql = "INSERT INTO NEWSLETTER SET ?";
+    let sql = "INSERT INTO LOG SET ?";
     let query = conexion.query(sql, register, (err, results) => {
         if (err) throw err;
         res.render('login')
@@ -209,7 +209,7 @@ app.post('/form-received', (req, res) => {
         metOn: metOn
     }
 
-    let sql = "INSERT INTO CONTACT SET ?";
+    let sql = "INSERT INTO USUARIO SET ?";
     let query = conexion.query(sql, data, (err, results) => {
         if (err) throw err;
         res.render('form-received');
