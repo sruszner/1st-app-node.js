@@ -76,11 +76,11 @@ app.get('/administrator', (req, res) => {
 })
 
 app.post('/administrator', (req, res) => {
-    console.log(req.body.firstName);
+    console.log(req.body.firstname);
     console.log(req.body.email);
-    console.log(req.body.idGenero);
+    console.log(req.body.id);
     //res.send("Actualizamos los datos");
-    let sql = "UPDATE CONTACT SET firstName='" + req.body.firstName + "', email='" + req.body.email + "' WHERE idGenero=" + req.body.idGenero;
+    let sql = "UPDATE USUARIO SET firstName='" + req.body.firstname + "', email='" + req.body.email + "' WHERE idGenero=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
@@ -89,9 +89,9 @@ app.post('/administrator', (req, res) => {
 
 app.post('/delete', (req, res) => {
 
-    console.log(req.body.idGenero);
+    console.log(req.body.id);
     //res.send("Eliminamos los datos");
-    let sql = "DELETE FROM USUARIO WHERE idGenero=" + req.body.idGenero;
+    let sql = "DELETE FROM USUARIO WHERE idGenero=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
         res.redirect('/administrator')
