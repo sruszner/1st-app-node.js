@@ -200,7 +200,7 @@ app.post('/register', (req, res) => {
         email: email,
         firstName: firstName,
         pass: pass,
-        plan: "1"
+        plan: "4"
     }
 
     let sql = "INSERT INTO REGISTRO SET ?";
@@ -339,7 +339,7 @@ app.post('/subscribed', (req, res) => {
     const { email } = req.body;
     let data = {
         email: email,
-        plan: "1"
+        plan: "4"
     }
     console.log('subscribed');
     let sql = "INSERT INTO NEWSLETTER SET ?";
@@ -370,7 +370,8 @@ app.post('/subscribed', (req, res) => {
         from: 'spafrancorchapsapp@gmail.com',
         to: email,
         subject: 'SPA Circuit - Subscribed',
-        html: '<h3>Thank you so much for your subscription,</h3> <p>it means a lot to us. We really appreciate you taking a moment of your time today.</p>'
+        html: ('<h3>Thank you so much for your subscription, ' + email + '</h3>' + ' <p>it means a lot to us. We really appreciate you taking a moment of your time today.</p>')
+        
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
