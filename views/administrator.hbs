@@ -2,7 +2,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
 
-<div class="container-xl">
+<div class="m-5">
     <div class="text-center m-5">
         <hr>
         <h1>{{tabla1}}</h1>
@@ -15,31 +15,36 @@
                 <th scope="col"> Id </th>
                 <th scope="col"> Name </th>
                 <th scope="col"> Last Name </th>
-                <th scope="col"> User </th>
+                {{!-- <th scope="col"> User </th> --}}
                 <th scope="col"> Email </th>
                 <th scope="col"> Address </th>
                 <th scope="col"> Country </th>
                 <th scope="col"> Zip </th>
+                <th scope="col"> Plan code </th>
+                <th scope="col"> Message </th>
                 <th scope="col"> Met On </th>
                 <th scope="col">Actions</th>
 
             </tr>
         </thead>
         <tbody class="text-center">{{#each results}}<tr>
-                <td>{{ idGenero }}</td>
+                <td>{{ id }}</td>
                 <td>{{ firstName }}</td>
                 <td>{{ lastName }}</td>>
-                <td>{{ username }}</td>>
+                {{!-- <td>{{ username }}</td>> --}}
                 <td>{{ email }}</td>
                 <td>{{ address }}</td>
                 <td>{{ country }}</td>
                 <td>{{ zip }}</td>
+                <td>{{ plan }}</td>
+                <td>{{ message }}</td>
                 <td>{{ metOn }}</td>
                 <td>
-                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-id="{{ idGenero}}" data-firstname="{{ firstName}}" data-email="{{ email}}">
+                    <a href="javascript:void(0);" class="btn btn-secondary edit" data-id="{{ id}}"
+                        data-firstname="{{ firstName}}" data-email="{{ email}}" data-plan="{{ plan}}">
                         Edit
                     </a>
-                    <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ idGenero}}">
+                    <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ id}}">
                         Delete
                     </a>
                 </td>
@@ -74,6 +79,20 @@
                             <input type="email" class="form-control email" name="email" required />
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="plan" class="form-label">Plan</label>
+                            <select class="form-select" name="plan" required>
+                                <option value="">Choose...</option>
+                                <option value="1">Free</option>
+                                <option value="2">Basic</option>
+                                <option value="3">Premium</option>
+                                <option value="4">Premium D+</option>
+                                <option value="5">Cancel my plan</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid option.
                             </div>
                         </div>
                     </form>
@@ -120,9 +139,11 @@
             let id = $(this).data('id');
             let firstname = $(this).data('firstname');
             let email = $(this).data('email');
+            let plan = $(this).data('plan');
             $('#editModal').modal('show');
             $('.firstname').val(firstname);
             $('.email').val(email);
+            $('.plan').val(plan);
             $('.id').val(id);
         })
         // Modal DELETE    

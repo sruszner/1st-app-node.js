@@ -100,12 +100,27 @@
                             Zip code required.
                         </div>
                     </div>
+
+                    
+                    <div class="col-md-5">
+                        <label for="plan" class="form-label">Plan</label>
+                        <select class="form-select" name="plan" required>
+                            <option value="1">Free</option>
+                            <option value="2">Basic</option>
+                            <option value="3">Premium</option>
+                            <option value="4">Premium D+</option>
+                            <option value="5">Cancel my plan</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="col-12 p-4">
-                    <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                    <textarea class="form-control" name="textarea" id="exampleFormControlTextarea1"
-                        placeholder="Your message" rows="6"></textarea>
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" name="message" id="message" placeholder="Your message" rows="6" required></textarea>
                     <div class="invalid-feedback">
                         Please enter your message.
                     </div>
@@ -146,7 +161,7 @@
 
                 <hr class="my-4" />
 
-                <input type="submit" class="w-20 btn btn-danger btn-lg" value="Send Form">
+                <input type="submit" class="w-20 btn btn-danger btn-lg" value="Send Form"> 
                 <p class="form-text text-muted mt-3">
                     * By contacting us, you agree with our terms and condition.
                 </p>
@@ -154,7 +169,6 @@
         </div>
     </div>
 </section>
-npm
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
