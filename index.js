@@ -8,7 +8,7 @@ const mysql = require('mysql2');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const session = require('express-session');
-const { request } = require('http');
+
 
 // Conectamos la app a una Base de Datos
 
@@ -49,6 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
+
 
 
 app.get('/', (req, res) => {
@@ -169,7 +170,64 @@ app.post('/forgot', (req, res) => {
     //res.send({respuesta: "tus datos son correctos"})
     const { emailForgot } = req.body;
     console.log(emailForgot);
-    res.send({ respuesta: "Check your email and follow the steps to reset your password" })
+    //res.send({ respuesta: "Check your email and follow the steps to reset your password" })
+    if (emailForgot) {
+        // Execute SQL query that'll select the account from the database based on the specified username and password
+        conexion.query('SELECT email FROM REGISTRO WHERE email = ?', [emailForgot], function (error, results, fields) {
+            // If there is an issue with the query, output the error
+            if (error) throw error;
+            // If the account exists
+            if (results.length > 0) {
+                // Redirect to home page - Pendiente: Hacer pagina de aviso y check SPAM
+                console.log('Instrucciones de recupero enviadas a su casilla');
+
+                let transporter = nodemailer.createTransport({
+                    //service: 'gmail',
+                    host: "smtp.gmail.com",
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: 'spafrancorchampsapp@gmail.com',
+                        pass: 'yqcocvlwiksrgvsy'
+                    }
+                });
+
+                transporter.verify(function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Server is ready to take our messages");
+                    }
+                });
+
+                var mailOptions = {
+                    from: 'spafrancorchapsapp@gmail.com',
+                    to: emailForgot,
+                    subject: 'SPA Circuit - Password reset',
+                    html: ('<h3>If you have requested a password change, please follow the link below. http://localhost:3030/reset-pass </h3> <p>If it wasn´t you, ignore this email</p>')
+                };
+                //https://app-spacircuit.herokuapp.com/reset-pass
+
+
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
+
+                res.redirect('login');
+
+            } else {
+                console.log('Datos incorrectos - Email no registrado');
+                res.redirect('forgot');
+            }
+        });
+    } else {
+        response.redirect('login');
+        response.end();
+    }
 })
 
 app.get('/reset-pass', (req, res) => {
@@ -179,12 +237,75 @@ app.get('/reset-pass', (req, res) => {
 app.post('/reset-pass', (req, res) => {
     console.log(req.body);
     //res.send({respuesta: "tus datos son correctos"})
-    const { password, logout_devices } = req.body;
+    const { email, password, logout_devices } = req.body;
+    console.log(email);
     console.log(password);
     console.log(logout_devices);
-    res.send({ respuesta: "Your password has been successfully reset" })
-})
 
+    let newpass = {
+        pass: password
+    }
+
+    if (email) {
+        // Execute SQL query that'll select the account from the database based on the specified username and password
+        conexion.query('SELECT email, id FROM REGISTRO WHERE email = ?', [email], function (error, results, fields) {
+            // If there is an issue with the query, output the error
+            if (error) throw error;
+            // If the account exists
+            if (results.length > 0) {
+                console.log('Datos correctos - Está registrado');
+                const { email2, id } = results[0];
+                let sql = "UPDATE REGISTRO SET pass='" + req.body.password + "' WHERE id=" + id;
+                let query = conexion.query(sql, newpass, (err, results) => {
+                    if (err) throw err;
+                })
+                console.log('Nueva contraseña enviada a su correo');
+
+                let transporter = nodemailer.createTransport({
+                    //service: 'gmail',
+                    host: "smtp.gmail.com",
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: 'spafrancorchampsapp@gmail.com',
+                        pass: 'yqcocvlwiksrgvsy'
+                    }
+                });
+
+                transporter.verify(function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Server is ready to take our messages");
+                    }
+                });
+
+                var mailOptions = {
+                    from: 'spafrancorchapsapp@gmail.com',
+                    to: email,
+                    subject: 'SPA Circuit - NEW Password',
+                    html: ('<h3>Please check your new Login details </h3>' + 'Email: ' + email + '<br>Password: ' + password)
+                };
+                //https://app-spacircuit.herokuapp.com/reset-pass
+
+
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
+                res.redirect('login');
+
+            } else {
+                //Pendiente: Enviar modal de datos incorrectos
+                console.log('Datos incorrectos - Email no registrado');
+                res.redirect('reset-pass');
+            }
+        });
+    }
+})
 
 app.get('/register', (req, res) => {
     res.render('register')
@@ -372,7 +493,7 @@ app.post('/subscribed', (req, res) => {
         to: email,
         subject: 'SPA Circuit - Subscribed',
         html: ('<h3>Thank you so much for your subscription, ' + email + '</h3>' + ' <p>it means a lot to us. We really appreciate you taking a moment of your time today.</p>')
-        
+
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
