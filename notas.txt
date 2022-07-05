@@ -30,7 +30,7 @@ use dbtp;
 -- Creamos tablas: --
 
 create table planes(
-	id int unsigned not null auto_increment,
+	id int unsigned not null,
     plan varchar(50) not null,
     primary key(id)
 );
@@ -73,10 +73,12 @@ foreign key (plan) references planes(id)
 );
 
 
-INSERT INTO PLANES VALUES ( NULL, "FREE"); 
-INSERT INTO PLANES VALUES ( NULL, "BASIC"); 
-INSERT INTO PLANES VALUES ( NULL, "PREMIUM"); 
-INSERT INTO PLANES VALUES ( NULL, "PREMIUM D+"); 
-INSERT INTO PLANES VALUES ( NULL, "CANCEL"); 
+LOS ID DE PLANES ME LOS DA HEROKU, NO USAR AUTO INCREMENT, SINO DEBEMOS ADAPTAR VARIAS COSAS DEL CODIGO
+
+INSERT INTO PLANES VALUES ( "4", "FREE"); 
+INSERT INTO PLANES VALUES ( "14", "BASIC"); 
+INSERT INTO PLANES VALUES ( "24", "PREMIUM"); 
+INSERT INTO PLANES VALUES ( "34", "PREMIUM D+"); 
+INSERT INTO PLANES VALUES ( "44", "CANCEL"); 
 
 */

@@ -85,28 +85,24 @@ app.get('/administrator', (req, res) => {
 })
 
 app.post('/administrator', (req, res) => {
-    console.log(req.body.firstname);
-    console.log(req.body.email);
-    console.log(req.body.id);
     //res.send("Actualizamos los datos");
     let sql = "UPDATE FORMULARIO SET firstName='" + req.body.firstname + "', email='" + req.body.email + "', plan='" + req.body.plan + "' WHERE id=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
+        console.log("Datos actualizados correctamente");
         res.redirect('/administrator')
     })
 })
 
 app.post('/delete', (req, res) => {
-
-    console.log(req.body.id);
     //res.send("Eliminamos los datos");
     let sql = "DELETE FROM FORMULARIO WHERE id=" + req.body.id;
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
+        console.log("Datos eliminados");
         res.redirect('/administrator')
     })
 });
-
 
 app.get('/lmp1', (req, res) => {
     res.render('lmp1', { titulo: 'LMP1' })

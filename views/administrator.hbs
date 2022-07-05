@@ -10,7 +10,7 @@
     </div>
     <table class="table table-striped table-dark" id="mytable">
         <thead>
-            <tr class="text-center">
+            <tr class="text-center text-uppercase">
                 <!--<th scope="col"> ID </th> -->
                 <th scope="col"> Id </th>
                 <th scope="col"> Name </th>
@@ -27,7 +27,7 @@
 
             </tr>
         </thead>
-        <tbody class="text-center">{{#each results}}<tr>
+        <tbody class="text-center text-uppercase">{{#each results}}<tr>
                 <td>{{ id }}</td>
                 <td>{{ firstName }}</td>
                 <td>{{ lastName }}</td>>
@@ -83,8 +83,7 @@
                         </div>
                         <div class="col-md-5">
                             <label for="plan" class="form-label">Plan</label>
-                            <select class="form-select" name="plan" required>
-                                <option value="">Choose...</option>
+                            <select class="form-select plan"  name="plan" required>
                                 <option value="4">Free</option>
                                 <option value="14">Basic</option>
                                 <option value="24">Premium</option>
