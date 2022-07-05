@@ -80,7 +80,7 @@ app.get('/administrator', (req, res) => {
     let sql = "SELECT * FROM FORMULARIO";
     let query = conexion.query(sql, (err, results) => {
         if (err) throw err;
-        res.render('administrator', { tabla1: 'Contact List', results })
+        res.render('administrator', { tabla1: 'CONTACT LIST', results })
     })
 })
 
@@ -217,7 +217,7 @@ app.post('/forgot', (req, res) => {
                     }
                 });
 
-                res.redirect('login');
+                res.render('check-email');
 
             } else {
                 console.log('Datos incorrectos - Email no registrado');

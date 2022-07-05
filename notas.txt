@@ -4,14 +4,37 @@ HOST=us-cdbr-east-05.cleardb.net
 USER='bcb2adfad530a2'
 PASSWORD='5e1e84ca'
 PORTDB=3306
-DATABASE=heroku_b94d852201155b2 */
+DATABASE=heroku_b94d852201155b2 
+*/
 
 
-/* -- Creamos la DB -- 
+/* 
+Si utilizamos la DB local, se deben cambiar los ID de todas las consultas ya que HEROKU utiliza 
+otro sistema de numeracion
+
+PORT=3030
+HOST=localhost
+USER='root'
+PASSWORD='1234'
+PORTDB=3306
+DATABASE=dbtp
+*/
+
+
+
+/* 
+-- Creamos la DB -- 
 create database dbtp;
 -- Seleccionamos la DB --
 use dbtp;
 -- Creamos tablas: --
+
+create table planes(
+	id int unsigned not null auto_increment,
+    plan varchar(50) not null,
+    primary key(id)
+);
+
 create table formulario(
 	id int unsigned not null auto_increment,
     firstName varchar(80) not null,
@@ -49,15 +72,11 @@ primary key(id),
 foreign key (plan) references planes(id)
 );
 
-create table planes(
-	id int unsigned not null auto_increment,
-    plan varchar(50) not null,
-    primary key(id)
-);
 
 INSERT INTO PLANES VALUES ( NULL, "FREE"); 
 INSERT INTO PLANES VALUES ( NULL, "BASIC"); 
 INSERT INTO PLANES VALUES ( NULL, "PREMIUM"); 
 INSERT INTO PLANES VALUES ( NULL, "PREMIUM D+"); 
 INSERT INTO PLANES VALUES ( NULL, "CANCEL"); 
+
 */
