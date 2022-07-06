@@ -1,3 +1,4 @@
+
 /* 
 PORT=3030
 HOST=us-cdbr-east-05.cleardb.net
@@ -23,10 +24,12 @@ DATABASE=dbtp
 
 
 /* 
--- Creamos la DB -- 
+-- Creamos la DB (Crear DB si se desea utilizar una local y no la de heroku)-- 
 create database dbtp;
--- Seleccionamos la DB --
+
+-- Seleccionamos la DB (Si deseas utilizar la de heroku, omitir el paso "CREAR TABLA" y usar "use heroku_b94d852201155b2; una vez conectado a la db" --
 use dbtp;
+
 -- Creamos tablas: --
 
 create table planes(
