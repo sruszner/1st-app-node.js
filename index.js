@@ -184,7 +184,7 @@ app.post('/forgot', (req, res) => {
                     secure: true,
                     auth: {
                         user: 'spafrancorchampsapp@gmail.com',
-                        pass: 'yqcocvlwiksrgvsy'
+                        pass: 'quodedvuvzpzcrqw'
                     }
                 });
 
@@ -264,7 +264,7 @@ app.post('/reset-pass', (req, res) => {
                     secure: true,
                     auth: {
                         user: 'spafrancorchampsapp@gmail.com',
-                        pass: 'yqcocvlwiksrgvsy'
+                        pass: 'quodedvuvzpzcrqw'
                     }
                 });
 
@@ -332,7 +332,7 @@ app.post('/register', (req, res) => {
             secure: true,
             auth: {
                 user: 'spafrancorchampsapp@gmail.com',
-                pass: 'yqcocvlwiksrgvsy'
+                pass: 'quodedvuvzpzcrqw'
             }
         });
 
@@ -419,7 +419,7 @@ app.post('/form-received', (req, res) => {
             secure: true,
             auth: {
                 user: 'spafrancorchampsapp@gmail.com',
-                pass: 'yqcocvlwiksrgvsy'
+                pass: 'quodedvuvzpzcrqw'
             }
         });
 
@@ -471,7 +471,7 @@ app.post('/subscribed', (req, res) => {
         secure: true,
         auth: {
             user: 'spafrancorchampsapp@gmail.com',
-            pass: 'yqcocvlwiksrgvsy'
+            pass: 'quodedvuvzpzcrqw'
         }
     });
 
